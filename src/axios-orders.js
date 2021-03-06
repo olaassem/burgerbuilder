@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-axios.create({
-    baseURL: 'https://burgerbuilder-678a0-default-rtdb.firebaseio.com/'
+const instance = axios.create({
+    baseURL: 'https://burgerbuilder1111-default-rtdb.firebaseio.com/'
 });
 
 export default instance;
