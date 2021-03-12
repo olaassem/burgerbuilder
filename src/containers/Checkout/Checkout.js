@@ -16,23 +16,10 @@ class Checkout extends Component {
     checkoutCancelledHandler = () => {
         this.props.history.goBack();
     }
-
-    
     
     checkoutContinuedHandler = () => {
-        const queryParams = [];
-        for ( let i in this.state.ingredients ) {
-            queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
-        }
-
-        const queryString = queryParams.join('&');
-
-        this.props.history.replace({
-            pathname: '/checkout',
-            search: '?' + queryString
-        });
+        this.props.history.replace('/checkout/contact-data');
     }
-
 
     render() {
         return (
