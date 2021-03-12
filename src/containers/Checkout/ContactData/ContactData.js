@@ -1,5 +1,7 @@
 import React from 'react';
 
+import classes from './ContactData.css';
+
 import Button from '../../../components/UI/Button/Button';
 
 class ContactData extends Component {
@@ -15,7 +17,7 @@ class ContactData extends Component {
 
     render() { 
         return ( 
-            <div>
+            <div className={classes.ContactData}>
                 <h4>Enter Your Contact Data</h4>
                 <form>
                     <input type="text" name="name" placeholder="Your Name" />
