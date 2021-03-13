@@ -102,6 +102,8 @@ class BurgerBuilder extends Component {
             queryParams.push(encodeURIComponent(i) + '=' + encodeURIComponent(this.state.ingredients[i]));
         }
 
+        queryParams.push('price=' + this.state.totalPrice);
+
         const queryString = queryParams.join('&');
 
         this.props.history.replace({
@@ -109,41 +111,7 @@ class BurgerBuilder extends Component {
             search: '?' + queryString
         });
     }
-
-    
-    // purchaseContinueHandler = () => {
-    //     this.setState({loading: true});
-    //     //alert('Continue');
-    //     //need to add .json for firebase endpoints
-    //     const order = { 
-    //         ingredients: this.state.ingredients,
-    //         price: this.state.totalPrice,
-    //         customer:{
-    //             name: 'Roger',
-    //             address: {
-    //                 street: '123 Shady Tree',
-    //                 city: 'Shadeville',
-    //                 zipcode: 67875
-    //             },
-    //             email: 'redhat@email.com',
-    //             deliveryMethod: 'fastest'
-    //         }
-    //     };
-
-    //     axios.post('/orders.json', order)
-    //         .then( response => {
-    //             this.setState({
-    //                 loading: false, 
-    //                 purchasing: false
-    //             });
-    //         })
-    //         .catch( error => {
-    //             this.setState({
-    //                 loading: false, 
-    //                 purchasing: false
-    //             });
-    //         })
-    // }
+   
 
     render () {       //must use render() method with class components
 
