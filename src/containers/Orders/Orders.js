@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 
-import classes from './Orders.css';
+import Order from '../../components/Order/Order';
 
 class Orders extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {  }
-    }
+
+    this.state = {  }
+    
+}
     render() { 
         return (  );
     }
