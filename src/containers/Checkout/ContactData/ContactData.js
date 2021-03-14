@@ -55,11 +55,6 @@ class ContactData extends Component {
     render() { 
         let form = (
             <form>
-                <input className={classes.Input} type="text" name="name" placeholder="Your Name" />
-                <input className={classes.Input} type="text" name="email" placeholder="Your Email" />
-                <input className={classes.Input} type="text" name="street" placeholder="Your Street" />
-                <input className={classes.Input} type="text" name="city" placeholder="Your City" />
-                <input className={classes.Input} type="text" name="zipcode" placeholder="Your Zipcode" />
                 <Button 
                     clicked={this.orderHandler} 
                     btnType="Success">
