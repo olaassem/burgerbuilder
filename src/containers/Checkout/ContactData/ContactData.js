@@ -18,7 +18,8 @@ class ContactData extends Component {
                 value: '',
                 validation: {
                     required: true
-                }
+                },
+                valid: false
             },
             street: {
                 elementType: 'input',
@@ -29,7 +30,8 @@ class ContactData extends Component {
                 value: '',
                 validation: {
                     required: true
-                }
+                },
+                valid: false
             },
             zipcode: {
                 elementType: 'input',
@@ -39,8 +41,11 @@ class ContactData extends Component {
                 },
                 value: '',
                 validation: {
-                    required: true
-                }
+                    required: true,
+                    minLength: 5,
+                    maxLength: 5
+                },
+                valid: false
             },
             country: {
                 elementType: 'input',
@@ -51,7 +56,8 @@ class ContactData extends Component {
                 value: '',
                 validation: {
                     required: true
-                }
+                },
+                valid: false
             },
             email: {
                 elementType: 'input',
@@ -62,7 +68,8 @@ class ContactData extends Component {
                 value: '',
                 validation: {
                     required: true
-                }
+                },
+                valid: false
             },
             deliveryMethod: {
                 elementType: 'select',
@@ -109,22 +116,43 @@ class ContactData extends Component {
             })
      }
 
-     inputChangedHandler = (e, inputIdentifier) => {
-        //  console.log(e.target.value);
-         //need to update form config user input value on Change
-         const updatedOrderForm = {
-             ...this.state.orderForm
-         };
+     checkValidity(value, rules) {
+        let isValid = true;
+        
+        if (rules.required) {
+            isValid = value.trim() !== '' && isValid;
+        }
 
-         const updatedOrderFormElement = {
-             ...updatedOrderForm[inputIdentifier]
-         };
+        if (rules.minLength) {
+            isValid = value.length >= rules.minLength && isValid
+        }
 
-         updatedOrderForm.value = e.target.value;
-         updatedOrderForm[inputIdentifier] = updatedOrderFormElement;
+        if (rules.maxLength) {
+            isValid = value.length <= rules.maxLength && isValid
+        }
 
-         this.setState({ orderForm: updatedOrderForm });
-     }
+        return isValid;
+    }
+
+    inputChangedHandler = (event, inputIdentifier) => {
+        const updatedOrderForm = {
+            ...this.state.orderForm
+        };
+        const updatedFormElement = { 
+            ...updatedOrderForm[inputIdentifier]
+        };
+        updatedFormElement.value = event.target.value;
+        updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
+        updatedFormElement.touched = true;
+        updatedOrderForm[inputIdentifier] = updatedFormElement;
+        console.log(updatedFormElement);
+        
+        let formIsValid = true;
+        for (let inputIdentifier in updatedOrderForm) {
+            formIsValid = updatedOrderForm[inputIdentifier].valid && formIsValid;
+        }
+        this.setState({orderForm: updatedOrderForm, formIsValid: formIsValid});
+    }
 
     render() { 
         const formElementsArray = [];
@@ -141,7 +169,9 @@ class ContactData extends Component {
                     <Input 
                         key={formElement.id}
                         elementType={formElement.config.elementType} 
-                        elementConfig={formElement.config.elementConfig} 
+                        elementConfig={formElement.config.elementConfig}
+                        shouldValidate={formElement.config.validation}
+                        invalid={!formElement.config.valid} 
                         value={formElement.config.value}
                         changed={(e) => this.inputChangedHandler (e, formElement.id)} 
                     />
