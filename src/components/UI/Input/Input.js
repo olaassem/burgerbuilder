@@ -6,7 +6,7 @@ const input = ( props ) => {
     let inputElement = '';
 
     switch (props.elementType) {
-        case ('input'):
+        case ( 'input' ):
             inputElement = <input 
                 className={classes.InputElement} 
                 {...props.elementConfig} 
@@ -14,7 +14,7 @@ const input = ( props ) => {
             />;
             break;
     
-        case ('textarea'):
+        case ( 'textarea' ):
             inputElement = <textarea 
                 className={classes.InputElement} 
                 {...props.elementConfig} 
