@@ -84,7 +84,8 @@ class ContactData extends Component {
                         {value: 'cheapest', displayValue: 'Cheapest'}
                     ]
                 },
-                value: ''
+                value: '',
+                valid: true
             },
         },
         formIsValid: false,
@@ -93,7 +94,7 @@ class ContactData extends Component {
 
      orderHandler = (e) => {
         e.preventDefault();
-        console.log(this.props.ingredients);
+        // console.log(this.props.ingredients);
 
         this.setState({loading: true});
 
@@ -151,7 +152,7 @@ class ContactData extends Component {
         updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation);
         updatedFormElement.touched = true;
         updatedOrderForm[inputIdentifier] = updatedFormElement;
-        console.log(updatedFormElement);
+        // console.log(updatedFormElement);
         
         let formIsValid = true;
         for (let inputIdentifier in updatedOrderForm) {
